@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="3 seconds">
+
+    <contextName>${project.artifactId}</contextName>
+
+    <!-- Console appender (server log) -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%d{MMM dd - HH:mm:ss.SSS -} %C %M %X%n%p: [%t] %m%n%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="TRACE">
+        <appender-ref ref="console"/>
+    </root>
+
+    <logger name="com.chrisfort.uitests.demo" leve="DEBUG" />
+
+</configuration>
