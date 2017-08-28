@@ -19,11 +19,19 @@ public class WebDriverFactory {
     @Value("${chromeDriver.binary.path}")
     private String chromeDriverBinaryPath;
 
+    @Value("${firefox.binary.path}")
+    private String firefoxBinaryPath;
+
     private static final Logger LOG = LoggerFactory.getLogger(WebDriverFactory.class);
 
     public WebDriver webDriver(URL seleniumGridHost, String browser) {
         WebDriver driver = null;
+
+        LOG.debug("Chrome driver path [{}]", chromeDriverBinaryPath);
+        LOG.debug("Firefox driver path [{}]", firefoxBinaryPath);
+
         System.setProperty("webdriver.chrome.driver", chromeDriverBinaryPath);
+        System.setProperty("webdriver.gecko.driver", firefoxBinaryPath);
 
         LOG.debug("Creating WebDriver as {}", browser);
 
@@ -46,14 +54,14 @@ public class WebDriverFactory {
     //Basic Chrome driver
     private WebDriver chromeDriver(URL seleniumGridHost) {
         DesiredCapabilities desiredCapabilities = DesiredCapabilities.chrome();
-        return (WebDriver) (null == seleniumGridHost ? new ChromeDriver() : new RemoteWebDriver(
+        return (null == seleniumGridHost ? new ChromeDriver() : new RemoteWebDriver(
             seleniumGridHost, desiredCapabilities));
     }
 
     //Basic Firefox driver
     private WebDriver firefoxDriver(URL seleniumGridHost) {
         DesiredCapabilities desiredCapabilities = DesiredCapabilities.firefox();
-        return (WebDriver) (null == seleniumGridHost ? new FirefoxDriver() : new RemoteWebDriver(
+        return (null == seleniumGridHost ? new FirefoxDriver() : new RemoteWebDriver(
             seleniumGridHost, desiredCapabilities));
     }
 
