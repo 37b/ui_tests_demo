@@ -1,6 +1,7 @@
 package com.chrisfort.uitests.demo.CONFIG;
 
 
+import com.chrisfort.uitests.demo.utilities.MongoDbSetupUtil;
 import com.chrisfort.uitests.demo.utilities.WebDriverFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,5 +66,10 @@ public class ApplicationConfiguration {
         }
 
         return gridHost;
+    }
+
+    @Bean
+    public MongoDbSetupUtil mongoDbSetupUtil() {
+        return new MongoDbSetupUtil();
     }
 }
