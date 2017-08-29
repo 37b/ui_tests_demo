@@ -11,10 +11,11 @@
         </encoder>
     </appender>
 
-    <root level="TRACE">
+    <root level="DEBUG">
         <appender-ref ref="console"/>
     </root>
 
-    <logger name="com.chrisfort.uitests.demo" leve="DEBUG" />
-
+    <logger name="com.chrisfort.uitests.demo" level="DEBUG" />
+    <logger name="org.springframework" level="INFO" />
+    <logger name="org.apache.http" level="INFO" />
 </configuration>

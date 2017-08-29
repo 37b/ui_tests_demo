@@ -3,6 +3,8 @@ package com.chrisfort.uitests.demo.utilities;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.RemoteWebDriver;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.PropertySource;
 import org.springframework.test.context.TestContext;
@@ -13,15 +15,18 @@ import org.springframework.test.context.support.AbstractTestExecutionListener;
  */
 public class TestExecutionWithDriverListener extends AbstractTestExecutionListener {
 
+    private static final Logger LOG = LoggerFactory.getLogger(TestExecutionWithDriverListener
+        .class);
+
     private static WebDriver driver;
 
     private static String reportScreenshotsLocation;
 
     private static String reportLocation;
 
-    private static boolean screenShotOnSuccess;
+    private static String screenShotOnSuccess;
 
-    private static boolean screenShotOnFailure;
+    private static String screenShotOnFailure;
 
     private static String browserName;
 
@@ -41,19 +46,19 @@ public class TestExecutionWithDriverListener extends AbstractTestExecutionListen
         TestExecutionWithDriverListener.reportLocation = reportLocation;
     }
 
-    public static boolean getScreenShotOnSuccess() {
+    public static String getScreenShotOnSuccess() {
         return screenShotOnSuccess;
     }
 
-    public static void setScreenShotOnSuccess(boolean screenShotOnSuccess) {
+    public static void setScreenShotOnSuccess(String screenShotOnSuccess) {
         TestExecutionWithDriverListener.screenShotOnSuccess = screenShotOnSuccess;
     }
 
-    public static boolean getScreenShotOnFailure() {
+    public static String getScreenShotOnFailure() {
         return screenShotOnFailure;
     }
 
-    public static void setScreenShotOnFailure(boolean screenShotOnFailure) {
+    public static void setScreenShotOnFailure(String screenShotOnFailure) {
         TestExecutionWithDriverListener.screenShotOnFailure = screenShotOnFailure;
     }
 
@@ -83,9 +88,9 @@ public class TestExecutionWithDriverListener extends AbstractTestExecutionListen
 
         setReportLocation((String) properties.getProperty("report.location"));
         setReportScreenshotsLocation(
-            (String) properties.getProperty("report.screenshots" + ".location"));
-        setScreenShotOnFailure((boolean) properties.getProperty("report.screenshot.on.failure"));
-        setScreenShotOnSuccess((boolean) properties.getProperty("report.screenshot.on.success"));
+            (String) properties.getProperty("report.screenshots.location"));
+        setScreenShotOnFailure((String) properties.getProperty("report.screenshots.on.failure"));
+        setScreenShotOnSuccess((String) properties.getProperty("report.screenshots.on.success"));
 
         WebDriver driver = testContext.getApplicationContext().getBean(WebDriver.class);
         setDriver(driver);

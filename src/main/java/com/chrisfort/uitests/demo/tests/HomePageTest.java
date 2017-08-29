@@ -22,6 +22,5 @@ public class HomePageTest extends AbstractTest {
             System.err.println(options.getText());
         }
 
-
     }
 }

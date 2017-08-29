@@ -4,12 +4,16 @@ package com.chrisfort.uitests.demo.CONFIG;
 import com.chrisfort.uitests.demo.utilities.WebDriverFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by cpfort on 8/25/17.
@@ -42,5 +46,24 @@ public class ApplicationConfiguration {
     @Bean
     public WebDriverFactory webDriverFactory() {
         return new WebDriverFactory();
+    }
+
+    @Bean
+    public URL seleniumGridHost(
+        @Value("${selenium.grid.host}")
+            String host) {
+        URL gridHost = null;
+
+        if (null != host) {
+            try {
+                LOG.info("Selenium Grid Host URL: [{}]", host);
+                gridHost = new URL(host);
+            } catch (MalformedURLException mue) {
+                LOG.warn("Unable to parse Selenium Grid URL from properties. Using local driver "
+                    + "instead.");
+            }
+        }
+
+        return gridHost;
     }
 }
