@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class HomePageTest extends AbstractTest {
 
-    @Test(description = "example test")
+    @Test(description = "first example test")
     public void testDropdownSelect() {
         driver().get(homePage.homePageUrl);
         homePage.dropdownLink.click();
@@ -21,6 +21,7 @@ public class HomePageTest extends AbstractTest {
         for (WebElement options : dropdownOptions) {
             System.err.println(options.getText());
         }
+
 
     }
 }

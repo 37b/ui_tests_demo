@@ -36,8 +36,6 @@ public class ReportsListener implements IReporter {
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites,
         String outputDirectory) {
 
-        LOG.error(")))))))))))))))) "+TestExecutionWithDriverListener.getReportLocation());
-
         extent = new ExtentReports(
             TestExecutionWithDriverListener.getReportLocation() + File.separator + "index.html",
             true);

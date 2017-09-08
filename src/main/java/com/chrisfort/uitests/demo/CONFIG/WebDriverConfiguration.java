@@ -21,12 +21,6 @@ import java.net.URL;
 public class WebDriverConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(WebDriverConfiguration.class);
 
-/*    @Value("${chromeDriver.binary.path}")
-    private String chromeDriverBinaryPath;
-
-    @Value("${firefox.binary.path}")
-    private String firefoxBinaryPath;*/
-
     @Value("${selenium.default.browser}")
     String browser;
 
