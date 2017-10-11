@@ -72,8 +72,6 @@ public abstract class AbstractTest extends AbstractTestNGSpringContextTests {
 
         LOG.info("Creating an instance of the {} browser", browser);
 
-        setWebDriver(webDriverFactory.webDriver(seleniumGridHost, browser));
-
         setBrowserName(((RemoteWebDriver) driver).getCapabilities().getBrowserName());
 
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
@@ -82,6 +80,7 @@ public abstract class AbstractTest extends AbstractTestNGSpringContextTests {
 
     }
 
+    @Autowired
     protected void setWebDriver(WebDriver driver) {
         this.driver = driver;
     }

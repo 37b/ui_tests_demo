@@ -27,6 +27,34 @@ public class WebDriverFactory {
     @Value("${firefox.binary.path}")
     private String firefoxBinaryPath;
 
+    public WebDriver webDriver(URL seleniumGridHost, BrowserType browserType) {
+        WebDriver driver = null;
+
+        LOG.debug("Chrome driver path [{}]", chromeDriverBinaryPath);
+        LOG.debug("Firefox driver path [{}]", firefoxBinaryPath);
+
+        System.setProperty("webdriver.chrome.driver", chromeDriverBinaryPath);
+        System.setProperty("webdriver.gecko.driver", firefoxBinaryPath);
+
+        LOG.debug("Creating WebDriver as {}", String.valueOf(browserType));
+
+        switch (browserType) {
+            case CHROME:
+                driver = chromeDriver(seleniumGridHost);
+                break;
+            case FIREFOX:
+                driver = firefoxDriver(seleniumGridHost);
+                break;
+            case IPHONE_6_EMULATOR:
+                driver = mobileEmulationDriver(seleniumGridHost, "Apple iPhone 6");
+                break;
+            default:
+                driver = chromeDriver(seleniumGridHost);
+        }
+
+        return driver;
+    }
+
     public WebDriver webDriver(URL seleniumGridHost, String browser) {
         WebDriver driver = null;
 

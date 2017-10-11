@@ -23,35 +23,35 @@ public class UserRecordsDbConfiguration {
     @Autowired
     private MongoDbSetupUtil mongoDbSetupUtil;
 
-    @Value("mongoDb.userDb.host")
+    @Value("${mongoDb.userDb.host}")
     private String host;
 
-    @Value("mongoDb.userDb.host")
+    @Value("${mongoDb.userDb.host}")
     private String host2;
 
-    @Value("mongoDb.userDb.port")
+    @Value("${mongoDb.userDb.port}")
     private int port;
 
-    @Value("mongoDb.userDb.username")
+    @Value("${mongoDb.userDb.username}")
     private String username;
 
-    @Value("mongoDb.userDb.password")
+    @Value("${mongoDb.userDb.password}")
     private String password;
 
-    @Value("mongoDb.userDb.database")
+    @Value("${mongoDb.userDb.database}")
     private String database;
 
-    @Value("mongoDb.userDb.collection")
+    @Value("${mongoDb.userDb.collection}")
     private String collection;
 
-    @Bean
+//    @Bean
     public UserMongoDbUtil userMongoDbUtil(
         @Qualifier("userMongoTemplate")
             MongoTemplate userMongoTemplate) throws UnknownHostException {
         return new UserMongoDbUtil(userMongoTemplate);
     }
 
-    @Bean
+//    @Bean
     public MongoTemplate userMongoTemplate() throws UnknownHostException {
         MongoDbFactory mongoDbFactory = mongoDbSetupUtil.mongoDbFactory(host, host2, port, database,
             username, password, null);

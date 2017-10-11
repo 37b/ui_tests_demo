@@ -24,6 +24,9 @@ public class WebDriverConfiguration {
     @Value("${selenium.default.browser}")
     String browser;
 
+    @Value("${selenium.default.browser}")
+    WebDriverFactory.BrowserType browserType;
+
     @Value("${selenium.browser.language}")
     String browserLanguage;
 
@@ -34,13 +37,19 @@ public class WebDriverConfiguration {
     @Qualifier(value = "seleniumGridHost")
     private URL gridHostUrl;
 
-    @Bean(name = "WebDriver")
+    @Bean
     public WebDriver webDriver() {
-        LOGGER.info(
-            "Creating WebDriver using the following parameters:\nGrid Host = [" + gridHostUrl +
-                "]\nBrowser Type: [" + browser +"]");
-
-        return webDriverFactory.webDriver(gridHostUrl, browser);
+        LOGGER.info("");
+        return webDriverFactory.webDriver(gridHostUrl, browserType);
     }
+
+//    @Bean(name = "WebDriver")
+//    public WebDriver webDriver() {
+//        LOGGER.info(
+//            "Creating WebDriver using the following parameters:\nGrid Host = [" + gridHostUrl +
+//                "]\nBrowser Type: [" + browser +"]");
+//
+//        return webDriverFactory.webDriver(gridHostUrl, browser);
+//    }
 
 }
